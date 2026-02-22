@@ -1,0 +1,30 @@
+@model List<MyMvcApp.Models.Product>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h2>All Products</h2>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+@foreach (var item in Model)
+{
+    <div style="border:1px solid #ccc; padding:15px; width:200px;">
+        
+        <img src="~/images/@item.Image" width="150" height="150" />
+        
+        <h4>@item.Name</h4>
+        
+        <p>Price: @item.Price</p>
+
+        <a asp-controller="Product"
+           asp-action="Details"
+           asp-route-id="@item.Id">
+           View Details
+        </a>
+
+    </div>
+}
+
+</div>

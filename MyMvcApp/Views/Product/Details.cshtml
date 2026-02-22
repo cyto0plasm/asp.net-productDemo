@@ -1,0 +1,22 @@
+@model MyMvcApp.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div style="border:1px solid #ccc; padding:20px; width:300px;">
+    
+    <img src="~/images/@Model.Image" width="250" height="250" />
+
+    <p><strong>Price:</strong> @Model.Price</p>
+
+    <br />
+
+    <a asp-controller="Product"
+       asp-action="Index">
+       Back to Products
+    </a>
+
+</div>
