@@ -1,22 +1,37 @@
 @model MyMvcApp.Models.Product
-
 @{
     ViewData["Title"] = "Product Details";
+    Layout = "_Layout";
 }
-
-<h2>@Model.Name</h2>
-
-<div style="border:1px solid #ccc; padding:20px; width:300px;">
-    
-    <img src="~/images/@Model.Image" width="250" height="250" />
-
-    <p><strong>Price:</strong> @Model.Price</p>
-
-    <br />
-
-    <a asp-controller="Product"
-       asp-action="Index">
-       Back to Products
-    </a>
-
-</div>
+<h1 class="text-3xl font-semibold text-gray-800 mb-10">Product Details</h1>
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden 
+        hover:shadow-md transition duration-200">
+        <!-- Image -->
+        <img src="~/images/@Model.Image" class="w-full h-72 object-cover" />
+        <!-- Content -->
+        <div class="p-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">@Model.Name</h2>
+            <p class="text-gray-600 text-lg mb-8">$@Model.Price</p>
+            <!-- Buttons -->
+            <div class="flex justify-between items-center">
+                <a asp-controller="Product" asp-action="Index" 
+                class="text-sm font-medium text-blue-600 
+                    hover:text-blue-800 transition">
+                    ← Back</a>
+                <div class="flex gap-3">
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"  
+                    class="text-sm font-medium bg-gray-800 text-white 
+                        px-4 py-2 rounded-lg 
+                        hover:bg-gray-900 transition">
+                        Edit</a>
+                    <!-- Delete Form -->
+                    <form asp-action="Delete"   asp-route-id="@Model.Id"  method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit"  class="text-sm font-medium bg-red-600 text-white 
+                            px-4 py-2 rounded-lg 
+                            hover:bg-red-700 transition">
+                            Delete</button>
+                    </form>
+                </div>
+            </div></div></div></div>

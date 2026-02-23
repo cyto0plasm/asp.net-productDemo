@@ -1,30 +1,96 @@
 @model List<MyMvcApp.Models.Product>
 
 @{
-    ViewData["Title"] = "All Products";
+    ViewData["Title"] = "Products";
+    Layout = "_Layout";
 }
 
-<h2>All Products</h2>
+<h1 class="text-3xl font-semibold text-gray-800 mb-10">
+    Products
+</h1>
 
-<div style="display:flex; gap:20px; flex-wrap:wrap;">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
-@foreach (var item in Model)
+@if (Model == null || !Model.Any())
 {
-    <div style="border:1px solid #ccc; padding:15px; width:200px;">
-        
-        <img src="~/images/@item.Image" width="150" height="150" />
-        
-        <h4>@item.Name</h4>
-        
-        <p>Price: @item.Price</p>
-
-        <a asp-controller="Product"
-           asp-action="Details"
-           asp-route-id="@item.Id">
-           View Details
-        </a>
-
+    <div class="col-span-full text-center text-gray-500 text-lg py-16">
+        No products available.
     </div>
+}
+else
+{
+    @foreach (var item in Model)
+    {
+        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden 
+                    hover:shadow-md transition duration-200">
+
+            <!-- Image -->
+            @if (!string.IsNullOrEmpty(item.Image))
+            {
+                <img src="~/images/@item.Image"
+                     alt="@item.Name"
+                     class="w-full h-52 object-cover" />
+            }
+            else
+            {
+                <div class="w-full h-52 bg-gray-100 flex items-center justify-center text-gray-400">
+                    No Image
+                </div>
+            }
+
+            <!-- Content -->
+            <div class="p-6">
+
+                <h2 class="text-lg font-semibold text-gray-800 mb-2">
+                    @item.Name
+                </h2>
+
+                <p class="text-gray-600 mb-6">
+                    $@item.Price
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex justify-between items-center">
+
+                    <a asp-controller="Product"
+                       asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="text-sm font-medium text-blue-600 hover:text-blue-800 transition">
+                        View
+                    </a>
+
+                    <div class="flex gap-2">
+
+                        <a asp-controller="Product"
+                           asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="text-sm font-medium bg-gray-800 text-white px-4 py-2 rounded-lg 
+                                  hover:bg-gray-900 transition">
+                            Edit
+                        </a>
+
+                        <!-- Delete -->
+                        <form asp-action="Delete"
+                              asp-route-id="@item.Id"
+                              method="post">
+    @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="text-sm font-medium bg-red-600 text-white 
+                                           px-4 py-2 rounded-lg 
+                                           hover:bg-red-700 transition">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
 }
 
 </div>

@@ -94,3 +94,4 @@ D:\Programming\mm\MyMvcApp\obj\Debug\net9.0\refint\MyMvcApp.dll
 D:\Programming\mm\MyMvcApp\obj\Debug\net9.0\MyMvcApp.pdb
 D:\Programming\mm\MyMvcApp\obj\Debug\net9.0\MyMvcApp.genruntimeconfig.cache
 D:\Programming\mm\MyMvcApp\obj\Debug\net9.0\ref\MyMvcApp.dll
+D:\Programming\mm\MyMvcApp\obj\Debug\net9.0\MyMvcApp.sourcelink.json
